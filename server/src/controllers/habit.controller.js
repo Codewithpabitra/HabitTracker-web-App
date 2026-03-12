@@ -1,6 +1,6 @@
 import Habit from "../models/habit.model.js";
-import User from "../models/user.model.js"
-import { sendStreakMilestoneEmail } from "../services/email.service.js"
+import User from "../models/user.model.js";
+import { sendStreakMilestoneEmail } from "../services/email.service.js";
 import {
   createHabitSchema,
   updateHabitSchema,
@@ -52,7 +52,6 @@ export const createHabit = async (req, res, next) => {
   }
 };
 
-
 export const getHabits = async (req, res, next) => {
   try {
     const habits = await Habit.find({ userId: req.user }).sort({
@@ -68,7 +67,6 @@ export const getHabits = async (req, res, next) => {
     next(e);
   }
 };
-
 
 export const updateHabit = async (req, res, next) => {
   try {
@@ -137,47 +135,46 @@ export const deleteHabit = async (req, res, next) => {
   }
 };
 
-
 export const completeHabit = async (req, res, next) => {
   try {
     const user = await User.findById(req.user);
 
     const habit = await Habit.findOne({
       _id: req.params.id,
-      userId: req.user
+      userId: req.user,
     });
 
     if (!habit) {
       return res.status(404).json({
         success: false,
-        message: "Habit not found"
+        message: "Habit not found",
       });
     }
 
     const today = new Date();
-    today.setHours(0,0,0,0);
+    today.setHours(0, 0, 0, 0);
 
     const yesterday = new Date(today);
     yesterday.setDate(today.getDate() - 1);
 
     // check if already completed today
-    const alreadyCompleted = habit.completedDates.some(date => {
+    const alreadyCompleted = habit.completedDates.some((date) => {
       const d = new Date(date);
-      d.setHours(0,0,0,0);
+      d.setHours(0, 0, 0, 0);
       return d.getTime() === today.getTime();
     });
 
     if (alreadyCompleted) {
       return res.status(400).json({
         success: false,
-        message: "Habit already completed today"
+        message: "Habit already completed today",
       });
     }
 
     // check if yesterday was completed
-    const completedYesterday = habit.completedDates.some(date => {
+    const completedYesterday = habit.completedDates.some((date) => {
       const d = new Date(date);
-      d.setHours(0,0,0,0);
+      d.setHours(0, 0, 0, 0);
       return d.getTime() === yesterday.getTime();
     });
 
@@ -197,21 +194,15 @@ export const completeHabit = async (req, res, next) => {
     await habit.save();
 
     // auto 10 day streak mail
-    if (habit.streak % 10 === 0) {
-
-  await sendStreakMilestoneEmail(
-    user.email,
-    user.name,
-    habit.streak
-  )
-}
+    if (habit.streak > 0 && habit.streak % 10 === 0) {
+      await sendStreakMilestoneEmail(user.email, user.name, habit.streak);
+    }
 
     res.status(200).json({
       success: true,
       message: "Habit completed for today",
-      data: habit
+      data: habit,
     });
-
   } catch (e) {
     console.error("Error in complete a habit", e);
     next(e);
