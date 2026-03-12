@@ -1,16 +1,24 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { MdArrowOutward } from "react-icons/md";
 import { RiStarSFill } from "react-icons/ri";
 import { RiStarHalfSLine } from "react-icons/ri";
+import { AuthContext } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
+
+    const {token} = useContext(AuthContext);
+    const navigate = useNavigate();
+
   return (
     <div className='mt-20 flex flex-col items-center justify-center gap-10 '>
       <div className='flex flex-col items-center justify-center gap-5 '>
-        <h1 className='text-7xl text-center tracking-wide leading-20 '>Take Control of <br /> Your Habits With AI</h1>
+        <h1 className='text-7xl text-center tracking-wide leading-20'>Take Control of <br /> Your Habits With AI</h1>
       <p className='text-lg text-muted-foreground w-130 text-center text-secondary'> Build better habits, write daily journals, and unlock powerful AI insights that help you grow into your most consistent self.</p>
       </div>
-      <button className='px-5 py-3 bg-primary text-black rounded-full flex justify-center items-center gap-1 font-semibold hover:gap-2 cursor-pointer text-sm'>Get started now<MdArrowOutward size={20} /></button>
+      <button 
+      onClick={() => token ? navigate("/dashboard") : navigate("/login")}
+      className='px-5 py-3 bg-primary text-black rounded-full flex justify-center items-center gap-1 font-semibold hover:gap-2 cursor-pointer text-sm'>{token ? "Dashboard" : "Get started now"}<MdArrowOutward size={20} /></button>
 
       <div className='flex flex-col gap-2 mt-10 '>
         <p className='text-sm text-center'>They trust us</p>
@@ -21,7 +29,7 @@ const Hero = () => {
             </div>
         ))}
         <RiStarHalfSLine />
-        <p className='ml-2 '>4.9</p>
+        <p className='ml-2 '>4.5</p>
       </div>
       </div>
 

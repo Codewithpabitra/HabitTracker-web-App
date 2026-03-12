@@ -1,7 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const Navbar = () => {
+
+    const {token} = useContext(AuthContext);
+    const navigate = useNavigate();
+
   return (
     <div className="flex justify-between items-center ">
       <div className="flex justify-center items-center gap-10 ">
@@ -16,6 +21,7 @@ const Navbar = () => {
       </div>
       <div className="button">
         <button
+        onClick={() => token ? navigate("/dashboard") : navigate("/login")}
           className="px-5 py-2 bg-primary text-black rounded-full font-medium cursor-pointer
 shadow-[0_0_15px_var(--color-primary)]
 transition-all duration-300 text-sm" 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import InsightCard from "./InsightCard";
 import { MdArrowOutward, MdOutlineInsights } from "react-icons/md";
 import { FaPen } from "react-icons/fa";
@@ -8,8 +8,15 @@ import WorkCard from "./WorkCard";
 import { GrStatusGood } from "react-icons/gr";
 import { GiProgression } from "react-icons/gi";
 import { SiPagespeedinsights } from "react-icons/si";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 
 const About = () => {
+
+     const {token} = useContext(AuthContext);
+    const navigate = useNavigate();
+
+
   const insights = [
     {
       title: "AI Habit Insights",
@@ -91,7 +98,7 @@ const About = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-5">
             {works.map((item, index) => (
-              <WorkCard title={item.title} icon={item.icon} desc={item.desc} />
+              <WorkCard key={index} title={item.title} icon={item.icon} desc={item.desc} />
             ))}
           </div>
         </div>
@@ -104,7 +111,9 @@ const About = () => {
             <p className="max-w-md text-center ">Join thousands of users who trust HabitMind for simple, seamless, and personalized insights of habits.</p>
             </div>
             <div>
-                <button className='px-5 py-3 bg-primary text-black rounded-full flex justify-center items-center gap-1 font-semibold cursor-pointer text-sm'>Get started now<MdArrowOutward size={20} /></button>
+                <button
+                onClick={() => token ? navigate("/dashboard") : navigate("/login")}
+                className='px-5 py-3 bg-primary text-black rounded-full flex justify-center items-center gap-1 font-semibold cursor-pointer text-sm'>{token ? "Dashboard" : "Get started now"}<MdArrowOutward size={20} /></button>
             </div>
       </div>
     </div>
