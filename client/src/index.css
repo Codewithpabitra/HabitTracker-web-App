@@ -1,1 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import "tailwindcss";
+
+body {
+     font-family: "Inter", sans-serif;
+}
+
+::selection {
+    background-color: var(--color-primary);
+    color: black;
+}
+
+@theme{
+    --color-primary:oklch(76.5% 0.177 163.223);
+    --color-secondary:oklch(87.1% 0.006 286.286);
+    --color-hover:oklch(90.5% 0.093 164.15);
+}
