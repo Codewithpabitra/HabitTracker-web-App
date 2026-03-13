@@ -12,7 +12,7 @@ const protect = (req, res, next) => {
         return res.status(401).json({ message: "Not authorized" });
     }
 
-    req.user = decoded.id;
+    req.user = { _id: decoded.id }; // ← Wrap it in an object
     next();
   } catch (error) {
     console.error("Error in auth middleware : ", error);

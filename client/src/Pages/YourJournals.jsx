@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { ParanoiaText } from "../components/ParanoiaText.jsx";
+import { getClassifiedWords } from "../utils/paranoia.js";
+
 import { Trash2, Pencil, NotebookPen, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
 import {
@@ -6,6 +9,7 @@ import {
   updateJournal,
   deleteJournal,
 } from "../services/journal.service";
+
 
 export default function YourJournals() {
   const [journals, setJournals] = useState([]);
@@ -18,6 +22,22 @@ export default function YourJournals() {
     content: "",
     mood: "neutral",
   });
+
+
+ const [redactedMap, setRedactedMap] = useState({});
+
+useEffect(() => {
+  if (journals.length === 0) return;
+  const combined = journals.map((j) => `[ID:${j._id}] ${j.content}`).join("\n\n");
+  getClassifiedWords(combined).then((words) => {
+    const map = {};
+    journals.forEach((j) => {
+      map[j._id] = words;
+    });
+    setRedactedMap(map);
+  }).catch(console.error);
+}, [journals.length]);
+
 
   const moodStyles = {
     happy: "bg-green-500/20 text-green-400 border-green-500/30",
@@ -116,7 +136,7 @@ export default function YourJournals() {
                 </h3>
               )}
 
-              <p className="text-zinc-300 whitespace-pre-wrap">{j.content}</p>
+              <ParanoiaText text={j.content} redactedWords={redactedMap[j._id] || []} />
 
               <div className="flex justify-between items-center mt-4">
                 <span

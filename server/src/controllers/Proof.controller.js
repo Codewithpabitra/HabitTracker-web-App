@@ -27,6 +27,9 @@ export const verifyAndCompleteHabit = async (req, res) => {
 
     // Find the habit and confirm ownership
     const habit = await Habit.findOne({ _id: id, userId });
+    console.log("Looking for habit:", id, "userId:", userId, typeof userId);
+    if(!habit)
+        console.log("not finding")
     if (!habit) {
       return res.status(404).json({ error: "Habit not found." });
     }

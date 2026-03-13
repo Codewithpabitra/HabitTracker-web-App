@@ -1,6 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
-
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+import dotenv from "dotenv"
+dotenv.config()
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY});
 
 /**
  * VISION AGENT — PROOF VERIFIER
@@ -52,7 +53,7 @@ Rules:
 
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash",
+      model: "gemini-3-flash-preview",
       contents: [
         {
           parts: [

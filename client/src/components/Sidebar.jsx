@@ -5,7 +5,8 @@ import {
   NotebookPen,
   Settings,
   User,
-  CheckSquare
+  CheckSquare,
+  BarChart2
 } from "lucide-react";
 
 export default function Sidebar() {
@@ -50,6 +51,11 @@ export default function Sidebar() {
         <NavLink to="/dashboard/your-journals" className={navStyle}>
           <BookOpen size={18} />
           Your Journals
+        </NavLink>
+
+        <NavLink to="/dashboard/emotional-dashboard" className={navStyle}>
+          <BarChart2 size={18} />
+          Mood Insights
         </NavLink>
 
       </div>

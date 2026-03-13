@@ -11,6 +11,7 @@ import DashLayout from "./layouts/DashLayout";
 import Habits from "./Pages/Habits";
 import Journals from "./Pages/Journals";
 import YourJournals from "./Pages/YourJournals";
+import EmotionalDashboard from "./Pages/EmotionalDashboard";
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
           <Route path="habits" element={<Habits />} />
           <Route path="journals" element={<Journals />} />
           <Route path="your-journals" element={<YourJournals />} />
+          <Route path="emotional-dashboard" element={<EmotionalDashboard />} />
         </Route>
       </Routes>
     </div>
