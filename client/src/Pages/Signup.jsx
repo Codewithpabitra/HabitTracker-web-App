@@ -22,6 +22,7 @@ export default function Signup() {
       toast.success("registered successfully");
       navigate('/login');
     } catch (err) {
+      console.log("Error : ", err);
       setError(err.response?.data?.message || 'Something went wrong. Please try again.');
     } finally {
       setLoading(false);

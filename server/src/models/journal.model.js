@@ -28,13 +28,21 @@ const journalSchema = new mongoose.Schema(
       type: String,
       enum: ["happy", "neutral", "sad", "productive", "stressed"],
       default: "neutral"
-    }
+    },
+    aiInsights: {
+  sentiment: {
+    type: String,
+    default: "Neutral",
+    enum: ["Positive", "Anxious", "Lethargic", "Neutral"]
+  },
+  themes: [String]
+}
   },
   { timestamps: true }
 );
 
 
-// First query 
+// Fast query 
 journalSchema.index({ userId: 1, createdAt: -1 });
 
 export default mongoose.model("Journal", journalSchema);

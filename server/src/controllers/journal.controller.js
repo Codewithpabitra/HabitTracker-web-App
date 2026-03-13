@@ -1,4 +1,5 @@
 import Journal from "../models/journal.model.js";
+import { analyzeJournal } from "../services/AI.service.js";
 import {
   createJournalSchema,
   updateJournalSchema
@@ -11,12 +12,25 @@ export const createEntry = async (req, res, next) => {
     const validatedData = createJournalSchema.parse(req.body);
     const { title, content, mood } = validatedData;
 
+    // created the entry
     const entry = await Journal.create({
       userId: req.user,
       title,
       content,
       mood
     });
+
+    // Generate the AI Sentiment
+    const aiResult = await analyzeJournal(content);
+    console.log("AI response received:", aiResult);
+
+    // Save the AI insights in the document 
+    entry.aiInsights = {
+      sentiment: aiResult.sentiment,
+      themes: aiResult.themes
+    };
+
+     await entry.save();
 
     res.status(201).json({
       success: true,

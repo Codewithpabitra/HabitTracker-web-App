@@ -27,6 +27,7 @@ export default function Login() {
       toast.success("Login successfully");
       navigate("/dashboard");
     } catch (err) {
+      console.log("Error : ", err);
       setError(
         err.response?.data?.message || "Invalid credentials. Please try again.",
       );

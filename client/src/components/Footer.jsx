@@ -1,12 +1,40 @@
 import React from 'react'
+import {motion} from "motion/react"
 
 const Footer = () => {
   return (
-    <div className=' flex justify-between items-center h-auto py-10 mt-20 border-t border-zinc-800'>
+    <div className=' flex justify-between items-center h-auto py-10 mt-20 border-t border-zinc-800 overflow-x-hidden relative'>
+      <div className='h-px w-full bg-linear-to-r from-transparent via-primary to-transparent absolute top-0 left-0'></div>
       <div className='flex flex-col justify-between items-start gap-6 '>
         <div className='h-3xl w-full flex flex-col gap-3 '>
-            <h1 className='text-xl font-semibold text-primary'>HabitMind</h1>
-            <p className='max-w-sm leading-tight '>Simple, insightful, and seamless habit tracking. HabitMind makes your habits to be happen.</p>
+            <motion.h1
+            initial={{
+              y: 10,
+              opacity: 0,
+            }}
+            whileInView={{
+              y: 0,
+              opacity: 1,
+            }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{
+              duration: 0.6,
+            }}
+            className='text-xl font-semibold text-primary'>HabitMind</motion.h1>
+            <motion.p
+            initial={{
+              y: 10,
+              opacity: 0,
+            }}
+            whileInView={{
+              y: 0,
+              opacity: 1,
+            }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{
+              duration: 0.8,
+            }}
+            className='max-w-sm leading-tight '>Simple, insightful, and seamless habit tracking. HabitMind makes your habits to be happen.</motion.p>
         </div>
         <div className='mt-5'>
         <p className='text-sm '>Created by team ofTheLosers.</p>
