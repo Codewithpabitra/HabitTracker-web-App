@@ -15,3 +15,23 @@ body {
     --color-secondary:oklch(87.1% 0.006 286.286);
     --color-hover:oklch(90.5% 0.093 164.15);
 }
+
+.react-calendar-heatmap .color-empty {
+  fill: #27272a;
+}
+
+.react-calendar-heatmap .color-scale-1 {
+  fill: #14532d;
+}
+
+.react-calendar-heatmap .color-scale-2 {
+  fill: #166534;
+}
+
+.react-calendar-heatmap .color-scale-3 {
+  fill: #16a34a;
+}
+
+.react-calendar-heatmap .color-scale-4 {
+  fill: #22c55e;
+}

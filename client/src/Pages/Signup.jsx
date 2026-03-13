@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Mail, Lock, User, ArrowRight, Loader2 } from 'lucide-react';
 import { motion } from 'motion/react';
-// import API from '../services/api';
+import API from '../services/api';
 import AuthLayout from './AuthLayout';
 
 import {toast} from "react-hot-toast"
@@ -71,7 +71,7 @@ export default function Signup() {
         </div>
 
         <div className="flex flex-col gap-3 ">
-          <label className="text-xs font-semibold uppercase tracking-widest text-white/40 ml-1">Password</label>
+          <label className="text-xs font-semibold uppercase tracking-widest text-white/40 ml-1">Password (min 6 characters)</label>
           <div className="relative group">
             <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/20 group-focus-within:text-green-400 transition-colors" />
             <input 

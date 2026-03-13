@@ -4,6 +4,7 @@ import { RiStarSFill } from "react-icons/ri";
 import { RiStarHalfSLine } from "react-icons/ri";
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import Dashboard from "../assets/Dashboard.png"
 
 const Hero = () => {
 
@@ -18,7 +19,7 @@ const Hero = () => {
       </div>
       <button 
       onClick={() => token ? navigate("/dashboard") : navigate("/login")}
-      className='px-5 py-3 bg-primary text-black rounded-full flex justify-center items-center gap-1 font-semibold hover:gap-2 cursor-pointer text-sm'>{token ? "Dashboard" : "Get started now"}<MdArrowOutward size={20} /></button>
+      className='px-5 py-3 bg-primary text-black rounded-full flex justify-center items-center gap-1 font-semibold hover:gap-2 cursor-pointer shadow-[0_0_15px_var(--color-primary)] text-sm'>{token ? "Dashboard" : "Get started now"}<MdArrowOutward size={20} /></button>
 
       <div className='flex flex-col gap-2 mt-10 '>
         <p className='text-sm text-center'>They trust us</p>
@@ -34,7 +35,7 @@ const Hero = () => {
       </div>
 
       <div className='mt-5 mx-auto relative '>
-        <img className='rounded-xl w-full mx-auto'  src={`https://framerusercontent.com/images/6AfF1TCZ0fgDvIyRPSrmwJXP9Hc.png?scale-down-to=1024&width=2880&height=1770`} alt="dashboard_image" />
+        <img className='rounded-xl w-full mx-auto'  src={Dashboard} alt="dashboard_image" />
         <span className="absolute top-0 left-0 w-full h-0.5 overflow-x-hidden 
   bg-linear-to-r from-transparent via-primary to-transparent
   -translate-y-1/2"></span>
