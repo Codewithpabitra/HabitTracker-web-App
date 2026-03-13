@@ -5,6 +5,8 @@ import morgan from "morgan"
 import authRoutes from "./routes/auth.routes.js"
 import habitRoutes from "./routes/habit.routes.js"
 import journalRoutes from "./routes/journal.routes.js"
+import agentRoutes from "./routes/agent.routes.js";
+
 
 import errorHandler from "./middlewares/error.middleware.js"
 
@@ -25,6 +27,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes)
 app.use("/api/habits", habitRoutes)
 app.use("/api/journal", journalRoutes)
+app.use("/api/agents", agentRoutes);
 
 
 // Global error handler
