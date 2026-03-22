@@ -346,7 +346,7 @@ Create a `.env` file in the root directory:
 
 ```env
 # Database
-MONGODB_URI="mongodb+srv://user:password@cluster.mongodb.net/habitmind"
+MONGODB_URI="your mongoDB Database URL"
 
 # Google Gemini
 GEMINI_API_KEY="AIza..."
