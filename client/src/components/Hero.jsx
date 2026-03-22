@@ -19,7 +19,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-center tracking-wide leading-tight sm:leading-tight"
+          className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-center tracking-wide leading-tight sm:leading-tight"
         >
           Take Control of <br className="hidden sm:block" /> Your Habits With AI
         </motion.h1>
@@ -60,24 +60,26 @@ const Hero = () => {
       </div>
 
       {/* Dashboard image */}
-      <motion.div
-        initial={{ rotate: 0 }}
-        whileHover={{ rotate: -3 }}
-        transition={{ duration: 0.3 }}
-        className="mt-4 sm:mt-6 w-full max-w-xs sm:max-w-2xl md:max-w-4xl lg:max-w-5xl mx-auto relative cursor-pointer px-2 sm:px-0"
-      >
-        <img
-          className="rounded-xl w-full mx-auto shadow-2xl"
-          src={Dashboard}
-          alt="dashboard_image"
-        />
+<motion.div
+  initial={{ rotate: 0 }}
+  whileHover={{ rotate: -3 }}
+  transition={{ duration: 0.3 }}
+  className="mt-4 sm:mt-6 w-full max-w-xs sm:max-w-2xl md:max-w-4xl lg:max-w-5xl mx-auto relative cursor-pointer px-2 sm:px-0"
+>
+  <img
+    className="rounded-tl-xl rounded-tr-xl rounded-bl-none rounded-br-none w-full mx-auto "
+    src={Dashboard}
+    alt="dashboard_image"
+  />
 
-        {/* glow lines */}
-        <span className="absolute top-0 left-0 w-full h-0.5 overflow-x-hidden bg-linear-to-r from-transparent via-primary to-transparent -translate-y-1/2" />
-        <span className="absolute top-0 left-0 w-full h-10 bg-linear-to-r from-transparent via-primary/60 to-transparent blur-2xl -translate-y-[90%]" />
-        <span className="absolute top-0 left-0 w-full h-10 bg-linear-to-r from-transparent via-primary/30 to-transparent blur-3xl -translate-y-[90%]" />
-      </motion.div>
+  {/* bottom fade */}
+    <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-zinc-900 from-5% via-zinc-900/60 via-60% to-transparent pointer-events-none" />
 
+  {/* glow lines */}
+  <span className="absolute top-0 left-0 w-full h-0.5 overflow-x-hidden bg-linear-to-r from-transparent via-primary to-transparent -translate-y-1/2" />
+  <span className="absolute top-0 left-0 w-full h-10 bg-linear-to-r from-transparent via-primary/60 to-transparent blur-2xl -translate-y-[90%]" />
+  <span className="absolute top-0 left-0 w-full h-10 bg-linear-to-r from-transparent via-primary/30 to-transparent blur-3xl -translate-y-[90%]" />
+</motion.div>
     </div>
   );
 };

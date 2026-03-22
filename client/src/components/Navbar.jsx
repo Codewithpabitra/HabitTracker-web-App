@@ -5,19 +5,27 @@ import { motion, AnimatePresence } from "motion/react";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Features",     href: "#features"   },
-  { label: "AI",           href: "#ai"          },
-  { label: "How It Works", href: "#how-it-works"},
+  { label: "Features",     href: "features"     },
+  { label: "AI",           href: "how-it-works"            },
+  { label: "How It Works", href: "how-it-works"  },
 ];
 
 const Navbar = () => {
-  const { token }   = useContext(AuthContext);
-  const navigate    = useNavigate();
+  const { token } = useContext(AuthContext);
+  const navigate  = useNavigate();
   const [open, setOpen] = useState(false);
 
   const handleCTA = () => {
     setOpen(false);
     token ? navigate("/dashboard") : navigate("/login");
+  };
+
+  const scrollTo = (id) => {
+    setOpen(false);
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
   return (
@@ -32,13 +40,13 @@ const Navbar = () => {
         {/* Desktop nav links */}
         <nav className="hidden md:flex items-center gap-1">
           {navLinks.map(({ label, href }) => (
-            <Link
+            <button
               key={label}
-              to={href}
-              className="px-4 py-2 rounded-xl text-sm text-zinc-400 hover:text-white hover:bg-white/5 transition-all duration-200 font-medium"
+              onClick={() => scrollTo(href)}
+              className="px-4 py-2 rounded-xl text-sm text-zinc-400 hover:text-white hover:bg-white/5 transition-all duration-200 font-medium cursor-pointer"
             >
               {label}
-            </Link>
+            </button>
           ))}
         </nav>
 
@@ -81,13 +89,12 @@ const Navbar = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05 }}
                 >
-                  <Link
-                    to={href}
-                    onClick={() => setOpen(false)}
-                    className="block px-4 py-2.5 rounded-xl text-sm text-zinc-300 hover:text-white hover:bg-white/5 transition-all font-medium"
+                  <button
+                    onClick={() => scrollTo(href)}
+                    className="w-full text-left block px-4 py-2.5 rounded-xl text-sm text-zinc-300 hover:text-white hover:bg-white/5 transition-all font-medium cursor-pointer"
                   >
                     {label}
-                  </Link>
+                  </button>
                 </motion.div>
               ))}
 

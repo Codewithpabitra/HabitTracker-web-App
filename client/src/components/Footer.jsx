@@ -29,7 +29,7 @@ const Footer = () => {
           </motion.p>
         </div>
         <div className='mt-2'>
-          <p className='text-xs text-zinc-500'>Created by team ofTheLosers.</p>
+          <p className='text-xs text-zinc-500'>Created with curiocity :)</p>
           <p className='text-xs text-zinc-500'>&copy; {new Date().getFullYear()} All rights reserved.</p>
         </div>
       </div>

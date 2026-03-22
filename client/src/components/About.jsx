@@ -61,7 +61,7 @@ const About = () => {
       </div>
 
       {/* ── Why Choose HabitMind ──────────────────────────────────── */}
-      <div className="mt-24 sm:mt-32 md:mt-40 flex flex-col gap-8 sm:gap-10">
+      <div id="features" className="mt-24 sm:mt-32 md:mt-40 flex flex-col gap-8 sm:gap-10">
         <div className="flex flex-col gap-2 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 10 }}
@@ -92,7 +92,7 @@ const About = () => {
       </div>
 
       {/* ── How It Works ─────────────────────────────────────────── */}
-      <div className="mt-20 sm:mt-24 md:mt-30 py-8 sm:py-10 relative">
+      <div id="how-it-works" className="mt-20 sm:mt-24 md:mt-30 py-8 sm:py-10 relative">
         <div
           className="absolute inset-0
             bg-[linear-gradient(to_right,var(--color-zinc-800)_1px,transparent_1px),linear-gradient(to_bottom,var(--color-zinc-800)_1px,transparent_1px)]
