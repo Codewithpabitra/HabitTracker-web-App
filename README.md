@@ -1,68 +1,78 @@
-# 🧠 HabitMind
+<div align="center">
 
-> *Build habits. Journal your life. Get psychologically destroyed by an AI if you skip leg day.*
+<h1>🧠 HabitMind</h1>
 
-HabitMind is a full-stack personal productivity and reflection platform that combines daily journaling, habit tracking with streak logic, AI-powered mood analysis, multi-agent accountability coaching, and computer-vision habit verification — all wrapped in a wildcard **Paranoia Mode** where classified information may or may not be redacted at any time.
+<p><em>Track habits. Journal your life. Let AI hold you accountable.</em></p>
+
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+[![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white)](https://react.dev/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Database-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![Express](https://img.shields.io/badge/Express-Backend-000000?logo=express&logoColor=white)](https://expressjs.com/)
+[![Gemini API](https://img.shields.io/badge/Powered%20by-Gemini%20API-4285F4?logo=google&logoColor=white)](https://ai.google.dev/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
+<br />
+
+> HabitMind is a full-stack personal productivity platform combining daily journaling, streak-based habit tracking, AI-powered mood analysis, a multi-agent accountability coach, and computer-vision habit verification — all in one cohesive experience.
+
+<br />
+
+</div>
 
 ---
 
-## 📸 Features at a Glance
+## 📋 Table of Contents
 
-| Feature | Description |
-|---|---|
-| 📓 Journaling Engine | Timestamped, editable daily long-form entries |
-| ✅ Habit Tracker | Create habits, check them off, track streaks |
-| 📊 Progress Visualisation | Calendar + history view of entries and completions |
-| 🎭 The Mood Ring | AI sentiment + theme extraction from journal entries |
-| 🤖 Accountability Coach | Dual-agent system that finds your excuses and calls them out |
-| 📷 Proof of Work | Upload a photo to verify habit completion — or get roasted |
-| 🕵️ Paranoia Mode | Random words get [REDACTED]. Hover to reveal. |
-
----
-
-## 🗂️ Table of Contents
-
-- [Tech Stack](#tech-stack)
-- [Getting Started](#getting-started)
-- [Core Features](#core-features)
+- [Features](#-features)
+- [Tech Stack](#️-tech-stack)
+- [Getting Started](#-getting-started)
+- [Core Features](#-core-features)
   - [Journaling Engine](#-journaling-engine)
   - [Habit Management & Streaks](#-habit-management--streaks)
   - [Progress Visualisation](#-progress-visualisation)
-- [Feature Shock #1 — The Mood Ring](#-feature-shock-1--the-mood-ring-ai-text-analysis)
-- [Feature Shock #2 — The Ruthless Accountability Coach](#-feature-shock-2--the-ruthless-accountability-coach-multi-agent)
-- [Feature Shock #3 — Proof of Work](#-feature-shock-3--proof-of-work-multimodal-vision)
-- [Wildcard — Paranoia Mode](#-wildcard--paranoia-mode)
-- [API Reference](#api-reference)
-- [Database Schema](#database-schema)
-- [Environment Variables](#environment-variables)
-- [Contributing](#contributing)
-- [License](#license)
+- [AI Features](#-ai-features)
+  - [The Mood Ring](#-the-mood-ring)
+  - [Accountability Coach](#-accountability-coach)
+  - [Proof of Work](#-proof-of-work)
+  - [Paranoia Mode](#️-paranoia-mode)
+- [API Reference](#-api-reference)
+- [Database Schema](#-database-schema)
+- [Environment Variables](#-environment-variables)
+- [Contributing](#-contributing)
+- [License](#-license)
+
+---
+
+## ✨ Features
+
+| Feature | Description |
+|---|---|
+| 📓 **Journaling Engine** | Timestamped, editable daily long-form entries with rich text support |
+| ✅ **Habit Tracker** | Create habits, mark completions, and track streaks with full history |
+| 📊 **Progress Visualisation** | Calendar and history views colour-coded by completion status |
+| 🎭 **The Mood Ring** | AI sentiment and theme extraction from every journal entry |
+| 🤖 **Accountability Coach** | Dual-agent system that reads your journals and calls out your excuses |
+| 📷 **Proof of Work** | Upload a photo to verify habit completion — or get roasted by AI |
+| 🕵️ **Paranoia Mode** | Random words get `[REDACTED]`. Hover to reveal. The AI won't explain why. |
 
 ---
 
 ## 🛠️ Tech Stack
 
 **Frontend**
-- React 18 + TypeScript
-- Tailwind CSS
-- Recharts (mood trend visualisations)
-- React Calendar
+- React 18 · Tailwind CSS · Recharts · React Calendar
 
 **Backend**
-- Node.js + Express (or Next.js API routes)
-- PostgreSQL (primary database)
-- Prisma ORM
+- Node.js · Express · MongoDB · Mongoose
 
 **AI / ML**
-- Anthropic Claude API (`claude-sonnet-4-20250514`)
-  - Text analysis (Mood Ring)
-  - Multi-agent pipeline (Accountability Coach)
-  - Vision verification (Proof of Work)
-  - Paranoia redaction (Wildcard)
+- Google Gemini API (`gemini-1.5-pro`) for mood analysis and multi-agent coaching
+- Google Gemini Multimodal (`gemini-1.5-pro-vision`) for image-based habit verification and Paranoia redaction
 
 **Infrastructure**
-- AWS S3 / Cloudflare R2 (image uploads)
-- Cron jobs via `node-cron` (Auditor agent background scans)
+- AWS S3 / Cloudflare R2 for image uploads
+- `node-cron` for scheduled Auditor agent background scans
 
 ---
 
@@ -71,9 +81,9 @@ HabitMind is a full-stack personal productivity and reflection platform that com
 ### Prerequisites
 
 - Node.js 18+
-- PostgreSQL 14+
-- An [Anthropic API key](https://console.anthropic.com/)
-- An S3-compatible storage bucket (for photo uploads)
+- MongoDB (local or [MongoDB Atlas](https://www.mongodb.com/atlas))
+- [Google Gemini API key](https://ai.google.dev/)
+- S3-compatible storage bucket (for photo uploads)
 
 ### Installation
 
@@ -85,12 +95,9 @@ cd habitmind
 # Install dependencies
 npm install
 
-# Set up environment variables
+# Configure environment variables
 cp .env.example .env
-# Edit .env with your credentials
-
-# Run database migrations
-npx prisma migrate dev
+# Fill in your credentials (see Environment Variables below)
 
 # Start the development server
 npm run dev
@@ -106,198 +113,164 @@ The app will be available at `http://localhost:3000`.
 
 A distraction-free editor for daily long-form entries.
 
-- Entries are automatically timestamped on creation
-- Fully editable at any time after creation
-- Rich text support (bold, italic, lists)
+- Entries are automatically timestamped on creation and fully editable afterwards
+- Rich text support — bold, italic, lists
 - Past entries accessible via the Calendar view
-- Each save triggers the **Mood Ring** analysis pipeline in the background
+- Each save asynchronously triggers the **Mood Ring** analysis pipeline
 
 ### ✅ Habit Management & Streaks
 
-Create and manage habits from your personal dashboard.
+Create and manage personal habits from your dashboard.
 
-- Add habits with a name and optional description (e.g., "Read 20 pages", "Meditation")
-- Daily checklist view to mark habits as complete
-- **Streak Logic**: backend service calculates:
-  - `currentStreak` — consecutive days a habit has been completed up to today
-  - `longestStreak` — the all-time record streak for that habit
-- Habits can be marked as **Proof Required** (see Feature Shock #3)
+- Add habits with a name and optional description (e.g. "Read 20 pages", "Morning meditation")
+- Daily checklist view to mark habits complete
+- Streak logic calculates `currentStreak` and `longestStreak` per habit
 
-**Streak Calculation Rules:**
-- Completing a habit on day D increments the streak if day D-1 was also completed
+**Streak Rules:**
+- Completing habit on day D increments the streak only if day D−1 was also completed
 - Missing a day resets `currentStreak` to 0
 - `longestStreak` is only ever updated upward
 
 ### 📊 Progress Visualisation
 
-- **Calendar View**: Each date is colour-coded — green if all habits were completed, yellow for partial, red for none
-- Click any date to view the journal entry and habit completion status for that day
-- **History Feed**: A reverse-chronological list of past journal entries with mood tags attached
+- **Calendar View** — each date is colour-coded: green (all complete), yellow (partial), red (none)
+- Click any date to view that day's journal entry and habit status
+- **History Feed** — reverse-chronological list of past entries with mood tags
 
 ---
 
-## 🎭 Feature Shock #1 — The Mood Ring (AI Text Analysis)
+## 🤖 AI Features
 
-> *Your users are journaling every day, but they aren't reading their past entries. Their data is rotting.*
+### 🎭 The Mood Ring
 
-### How It Works
+Every time a journal entry is saved, it is passed asynchronously to the Gemini API. The model returns:
 
-Every time a journal entry is saved, it is passed asynchronously to the Claude API for analysis. The model extracts:
+- **Sentiment** — a primary emotional tone (`Positive`, `Anxious`, `Reflective`, `Lethargic`, `Hopeful`, etc.)
+- **Key Themes** — 2–5 thematic tags (`Work Stress`, `Good Sleep`, `Family`, `Exercise`, etc.)
 
-- **Sentiment** — a primary emotional tone (e.g., `Positive`, `Anxious`, `Reflective`, `Lethargic`, `Hopeful`)
-- **Key Themes** — 2–5 thematic tags (e.g., `Work Stress`, `Good Sleep`, `Family`, `Exercise`, `Creativity`)
+These are stored back to the entry and surfaced in the **Emotional Dashboard** at `/mood`:
 
-These are stored back to the database and associated with that entry.
-
-### The Emotional Dashboard
-
-Navigate to `/mood` to see an aggregated view of the past 7–14 days:
-
-- **Sentiment Timeline** — a line/bar chart showing mood over time
+- **Sentiment Timeline** — line/bar chart showing mood over the past 7–14 days
 - **Theme Frequency Cloud** — most common themes in the period
-- **Weekly Summary Paragraph** — a generated narrative paragraph summarising your emotional arc for the week (e.g., *"This week you showed a strong recovery trajectory. Anxiety dominated Monday and Tuesday, likely tied to the 'Work Deadlines' theme that appeared 4 times, but by Thursday your tone shifted markedly positive."*)
-
-### Technical Implementation
+- **Weekly Summary** — a generated narrative paragraph describing your emotional arc for the week
 
 ```js
-// Triggered on journal entry save
-async function analyseJournalEntry(entryId, text) {
-  const response = await anthropic.messages.create({
-    model: "claude-sonnet-4-20250514",
-    max_tokens: 300,
-    system: `You are a mood analysis engine. Return ONLY valid JSON.
-      Extract: { sentiment: string, themes: string[] }`,
-    messages: [{ role: "user", content: text }]
-  });
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-  const { sentiment, themes } = JSON.parse(response.content[0].text);
-  await db.journalEntry.update({ where: { id: entryId }, data: { sentiment, themes } });
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
+async function analyseJournalEntry(entryId, text) {
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+
+  const result = await model.generateContent(
+    `You are a mood analysis engine. Return ONLY valid JSON.
+     Analyse the following journal entry and extract:
+     { "sentiment": string, "themes": string[] }
+
+     Journal entry: ${text}`
+  );
+
+  const { sentiment, themes } = JSON.parse(result.response.text());
+  await JournalEntry.findByIdAndUpdate(entryId, { sentiment, themes });
 }
 ```
 
 ---
 
-## 🤖 Feature Shock #2 — The Ruthless Accountability Coach (Multi-Agent)
+### 🤖 Accountability Coach
 
-> *Push notifications don't work anymore. Users ignore them. We need psychological warfare.*
+A two-agent pipeline that generates personalised, contextually targeted motivational messages.
 
-HabitMind runs a two-agent pipeline to generate personalised, contextually devastating motivational messages.
+#### Agent A — The Auditor
 
-### Agent A — The Auditor
-
-Runs on a scheduled cron job every 6 hours.
-
-**Job:** Scan all habit completion records. If a user has missed a habit for **2 or more consecutive days**, fire a payload to Agent B containing:
-- The habit name
-- Number of days missed
-- The user's last 5 journal entries (raw text)
+Runs on a cron job every 6 hours. Scans all habit completion records and fires a payload to Agent B for any habit missed for **2 or more consecutive days**, including:
+- Habit name and days missed
+- User's last 5 journal entries (raw text)
 
 ```js
-// cron: every 6 hours
 cron.schedule('0 */6 * * *', async () => {
-  const brokenStreaks = await db.habit.findMany({
-    where: { daysMissed: { gte: 2 } },
-    include: { user: { include: { journalEntries: { take: 5, orderBy: { date: 'desc' } } } } }
-  });
-
-  for (const habit of brokenStreaks) {
-    await invokeEnforcer(habit);
-  }
+  const brokenStreaks = await Habit.find({ daysMissed: { $gte: 2 } })
+    .populate({
+      path: "userId",
+      populate: { path: "journalEntries", options: { sort: { date: -1 }, limit: 5 } }
+    });
+  for (const habit of brokenStreaks) await invokeEnforcer(habit);
 });
 ```
 
-### Agent B — The Enforcer
+#### Agent B — The Enforcer
 
-Receives the Auditor's payload. Queries the user's recent journal entries for mentions of or motivations related to the broken habit. Then generates a **highly personalised, slightly unhinged** message.
+Receives the Auditor's payload, cross-references the user's journal entries, and generates a highly personalised message.
 
-**Example output:**
 > *"You missed 'Morning Run' for the third day in a row. Interesting. Because two days ago you wrote — and I'm quoting directly here — 'I really want to finish that half-marathon before summer.' Bold of you. Very bold. The race is in 11 weeks. The couch you're on right now does not have a finish line."*
 
-Messages are delivered as an **in-app modal** that appears on next login, and can optionally be configured to render as a simulated email UI.
-
-### Delivery Modes
+#### Delivery Modes
 
 | Mode | Behaviour |
 |---|---|
 | `modal` | Full-screen takeover on next app load |
-| `toast` | Persistent toast notification at bottom of screen |
+| `toast` | Persistent toast notification |
 | `inbox` | Simulated email inbox UI at `/coach/inbox` |
 
 ---
 
-## 📷 Feature Shock #3 — Proof of Work (Multimodal Vision)
-
-> *Users are liars. They are checking the "Ate a healthy breakfast" box while eating a donut.*
-
-### How It Works
+### 📷 Proof of Work
 
 Habits flagged as **Proof Required** replace the standard checkbox with a photo upload prompt.
 
-1. The user uploads a photo from their device or camera
-2. The image is sent to Claude's vision endpoint alongside the habit name and description
-3. Claude evaluates whether the image constitutes valid proof
-4. **If verified**: the habit is marked complete, streak increments, image saved to storage
-5. **If rejected**: the habit is NOT marked complete, and the AI returns a sarcastic rejection message
+1. User uploads a photo from their device or camera
+2. Image is sent to the **Gemini Multimodal** endpoint alongside the habit name and description
+3. Gemini evaluates whether the photo constitutes valid proof
+4. **Verified** → habit marked complete, streak increments, image saved to storage
+5. **Rejected** → habit not marked complete, AI returns a sarcastic rejection message
 
-### Example Interactions
+**Example interactions:**
 
-**Habit:** "Eat a healthy meal"
-- ✅ Upload: *photo of a salad bowl* → **Verified. Streak continues.**
-- ❌ Upload: *photo of a pizza box* → *"Bold choice submitting this as evidence for 'Eat a healthy meal.' I've seen more vegetables in a bag of Doritos. Rejected."*
-
-**Habit:** "Read 20 pages"
-- ✅ Upload: *photo of open book with visible pages* → **Verified.**
-- ❌ Upload: *photo of Netflix on TV* → *"An open browser is not a book. Audiobooks are also not a book. This is not a book. Rejected."*
-
-### Technical Implementation
+| Habit | Upload | Result |
+|---|---|---|
+| "Eat a healthy meal" | Photo of a salad | ✅ *Verified. Streak continues.* |
+| "Eat a healthy meal" | Photo of a pizza box | ❌ *"Bold choice submitting this as evidence…"* |
+| "Read 20 pages" | Photo of open book | ✅ *Verified.* |
+| "Read 20 pages" | Photo of Netflix | ❌ *"An open browser is not a book. Rejected."* |
 
 ```js
-async function verifyHabitProof(habitName, habitDescription, imageBase64) {
-  const response = await anthropic.messages.create({
-    model: "claude-sonnet-4-20250514",
-    max_tokens: 200,
-    messages: [{
-      role: "user",
-      content: [
-        {
-          type: "image",
-          source: { type: "base64", media_type: "image/jpeg", data: imageBase64 }
-        },
-        {
-          type: "text",
-          text: `Habit: "${habitName}". Description: "${habitDescription}".
-          Does this image prove the habit was completed?
-          Respond ONLY with JSON: { "verified": boolean, "message": string }
-          If not verified, make the message sarcastic and specific to what you see.`
-        }
-      ]
-    }]
-  });
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
-  return JSON.parse(response.content[0].text);
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
+async function verifyHabitProof(habitName, habitDescription, imageBase64, mimeType = "image/jpeg") {
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+
+  const result = await model.generateContent([
+    {
+      inlineData: { data: imageBase64, mimeType }
+    },
+    `Habit: "${habitName}". Description: "${habitDescription}".
+     Does this image prove the habit was completed?
+     Respond ONLY with JSON: { "verified": boolean, "message": string }
+     If not verified, make the message sarcastic and specific to what you see in the image.`
+  ]);
+
+  return JSON.parse(result.response.text());
 }
 ```
 
 ---
 
-## 🕵️ Wildcard — Paranoia Mode
+### 🕵️ Paranoia Mode
 
-> *The AI has decided some information is classified. It will not explain why.*
+Enable from Settings. When active, an AI agent periodically scans the rendered page text and wraps selected words in a `[REDACTED]` black bar. Hover to reveal.
 
-Enable **Paranoia Mode** from Settings. When active, an AI agent periodically scans the rendered page text and selects non-essential words or phrases to redact — wrapping them in a `[REDACTED]` black bar.
+- The selection logic is intentionally arbitrary — proper nouns, adjectives, the occasional article
+- Paranoia level: `Low` / `Medium` / `MAXIMUM CLEARANCE`
+- A 🔒 badge in the top-right corner indicates Paranoia Mode is active
 
-- Hover over any redacted word to reveal the original text via tooltip
-- The selection of what gets redacted is intentionally arbitrary and slightly absurd (proper nouns, adjectives, the occasional article)
-- Paranoia level is adjustable: `Low` / `Medium` / `MAXIMUM CLEARANCE`
-- A small 🔒 badge in the top-right corner indicates Paranoia Mode is active
-
-```js
-// Sample redacted output (rendered)
+```
 "Today was a [REDACTED] day. I went to the [REDACTED] and had [REDACTED] for lunch.
 Feeling [REDACTED] about the week ahead."
 ```
 
-*Why? We don't know. The agent doesn't explain itself.*
+*The agent does not explain its choices.*
 
 ---
 
@@ -314,85 +287,82 @@ Feeling [REDACTED] about the week ahead."
 | `GET` | `/api/mood/dashboard` | Aggregated mood data for past N days |
 | `GET` | `/api/coach/messages` | Retrieve accountability coach messages |
 | `POST` | `/api/proof/verify` | Submit image for vision verification |
-| `GET` | `/api/streaks/:habitId` | Get streak data for a habit |
+| `GET` | `/api/streaks/:habitId` | Get streak data for a specific habit |
 
 ---
 
 ## 🗄️ Database Schema
 
-```prisma
-model User {
-  id             String         @id @default(cuid())
-  email          String         @unique
-  habits         Habit[]
-  journalEntries JournalEntry[]
-  coachMessages  CoachMessage[]
-}
+```js
+// User
+const userSchema = new mongoose.Schema({
+  email:         { type: String, required: true, unique: true },
+  password:      { type: String, required: true, select: false },
+  habits:        [{ type: mongoose.Schema.Types.ObjectId, ref: "Habit" }],
+  journalEntries:[{ type: mongoose.Schema.Types.ObjectId, ref: "JournalEntry" }],
+  coachMessages: [{ type: mongoose.Schema.Types.ObjectId, ref: "CoachMessage" }],
+}, { timestamps: true });
 
-model Habit {
-  id            String       @id @default(cuid())
-  userId        String
-  name          String
-  description   String?
-  proofRequired Boolean      @default(false)
-  currentStreak Int          @default(0)
-  longestStreak Int          @default(0)
-  completions   Completion[]
-  user          User         @relation(fields: [userId], references: [id])
-}
+// Habit
+const habitSchema = new mongoose.Schema({
+  userId:        { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  name:          { type: String, required: true },
+  description:   String,
+  proofRequired: { type: Boolean, default: false },
+  currentStreak: { type: Number, default: 0 },
+  longestStreak: { type: Number, default: 0 },
+  completions:   [{ type: mongoose.Schema.Types.ObjectId, ref: "Completion" }],
+}, { timestamps: true });
 
-model Completion {
-  id        String   @id @default(cuid())
-  habitId   String
-  date      DateTime
-  proofUrl  String?
-  habit     Habit    @relation(fields: [habitId], references: [id])
-}
+// Completion
+const completionSchema = new mongoose.Schema({
+  habitId:  { type: mongoose.Schema.Types.ObjectId, ref: "Habit", required: true },
+  date:     { type: Date, required: true },
+  proofUrl: String,
+});
 
-model JournalEntry {
-  id        String   @id @default(cuid())
-  userId    String
-  content   String
-  date      DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  sentiment String?
-  themes    String[]
-  user      User     @relation(fields: [userId], references: [id])
-}
+// Journal Entry
+const journalEntrySchema = new mongoose.Schema({
+  userId:    { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  content:   { type: String, required: true },
+  sentiment: String,
+  themes:    [String],
+}, { timestamps: true });
 
-model CoachMessage {
-  id        String   @id @default(cuid())
-  userId    String
-  habitName String
-  message   String
-  read      Boolean  @default(false)
-  createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id])
-}
+// Coach Message
+const coachMessageSchema = new mongoose.Schema({
+  userId:    { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  habitName: { type: String, required: true },
+  message:   { type: String, required: true },
+  read:      { type: Boolean, default: false },
+}, { timestamps: true });
 ```
 
 ---
 
 ## ⚙️ Environment Variables
 
+Create a `.env` file in the root directory:
+
 ```env
 # Database
-DATABASE_URL="postgresql://user:password@localhost:5432/habitmind"
+MONGODB_URI="mongodb+srv://user:password@cluster.mongodb.net/habitmind"
 
-# Anthropic
-ANTHROPIC_API_KEY="sk-ant-..."
+# Google Gemini
+GEMINI_API_KEY="AIza..."
 
-# Storage (S3-compatible)
+# Storage (S3-compatible — works with AWS S3 or Cloudflare R2)
 STORAGE_BUCKET="habitmind-proofs"
 STORAGE_REGION="us-east-1"
 STORAGE_ACCESS_KEY="..."
 STORAGE_SECRET_KEY="..."
-STORAGE_ENDPOINT="https://s3.amazonaws.com"  # or Cloudflare R2 URL
+STORAGE_ENDPOINT="https://s3.amazonaws.com"
 
 # App
-NEXTAUTH_SECRET="your-secret-here"
-NEXTAUTH_URL="http://localhost:3000"
-CRON_SECRET="your-cron-secret"  # for securing the auditor endpoint
+JWT_SECRET="your-jwt-secret"
+PORT=5000
+CLIENT_URL="http://localhost:3000"
+CRON_SECRET="your-cron-secret"
 ```
 
 ---
@@ -412,20 +382,29 @@ npm run lint
 npm run type-check
 ```
 
-**Branching convention:**
-- `main` — stable
-- `dev` — integration branch
-- `feature/your-feature-name` — feature branches
+**Branch conventions:**
+
+| Branch | Purpose |
+|---|---|
+| `main` | Stable production code |
+| `dev` | Integration branch |
+| `feature/your-feature-name` | Individual feature branches |
 
 ---
 
 ## 📄 License
 
-MIT © HabitMind Contributors
+This project is licensed under the [MIT License](LICENSE).
 
 ---
 
-<p align="center">
-  Built with obsessive attention to streaks, occasional existential dread, and the Claude API.<br/>
-  <em>Your journal entries are private. The AI reads them anyway (to help you, of course).</em>
-</p>
+<div align="center">
+
+Built with obsessive attention to streaks and the [Gemini API](https://ai.google.dev/).<br/>
+<em>Your journal entries are private. The AI reads them anyway — to help you, of course.</em>
+
+<br />
+
+⭐ Star this repo if HabitMind helped you build a better routine.
+
+</div>
