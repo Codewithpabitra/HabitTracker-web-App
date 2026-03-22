@@ -168,11 +168,11 @@ function ProofModal({ habit, onClose, onVerified }) {
                   )}
                 </div>
               )}
-              {verdict.confidence !== undefined && (
+              {verdict.confidence != null && !isNaN(Number(verdict.confidence)) && (
                 <p className="text-zinc-500 text-xs">
-                  Confidence: {Math.round(verdict.confidence * 100)}%
+                  Confidence: {verdict.confidence === "high" ? "High" : verdict.confidence === "medium" ? "Medium" : "Low"}
                 </p>
-              )}
+                )}
             </div>
           )}
 

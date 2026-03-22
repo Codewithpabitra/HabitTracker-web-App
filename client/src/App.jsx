@@ -12,6 +12,7 @@ import Habits from "./Pages/Habits";
 import Journals from "./Pages/Journals";
 import YourJournals from "./Pages/YourJournals";
 import EmotionalDashboard from "./Pages/EmotionalDashboard";
+import Profile from "./Pages/Profile";
 
 const App = () => {
   return (
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="journals" element={<Journals />} />
           <Route path="your-journals" element={<YourJournals />} />
           <Route path="emotional-dashboard" element={<EmotionalDashboard />} />
+          <Route path="profile" element={<Profile />} />
         </Route>
       </Routes>
     </div>

@@ -6,75 +6,119 @@ import {
   Settings,
   User,
   CheckSquare,
-  BarChart2
+  BarChart2,
 } from "lucide-react";
+import { LuPanelLeftClose } from "react-icons/lu";
+import { motion, AnimatePresence } from "motion/react";
 
-export default function Sidebar() {
+export default function Sidebar({ open, setOpen }) {
+  const isMobile = () => window.innerWidth < 1024;
+
   const navStyle = ({ isActive }) =>
-    `flex items-center gap-3 p-2 rounded transition
-     ${
-       isActive
-         ? "bg-green-500/20 text-green-400"
-         : "hover:bg-zinc-800 text-zinc-300"
+    `flex items-center gap-3 px-3 py-2 rounded-lg transition-all text-md font-medium mt-1
+     ${isActive
+       ? "bg-green-500/20 text-green-400"
+       : "hover:bg-zinc-800 text-zinc-400 hover:text-zinc-200"
      }`;
 
+  const navItems = [
+    { to: "/dashboard", end: true, icon: <LayoutDashboard size={18} />, label: "Dashboard" },
+    { to: "/dashboard/habits",              icon: <CheckSquare size={18} />,  label: "Track Habits"   },
+    { to: "/dashboard/journals",            icon: <NotebookPen size={18} />,  label: "Write Journals" },
+    { to: "/dashboard/your-journals",       icon: <BookOpen size={18} />,     label: "Your Journals"  },
+    { to: "/dashboard/emotional-dashboard", icon: <BarChart2 size={18} />,    label: "Mood Insights"  },
+  ];
+
   return (
-    <div className="fixed left-0 top-0 w-64 h-screen bg-zinc-900 text-white flex flex-col border-r border-zinc-800">
+    <>
+      {/* Mobile backdrop */}
+      <AnimatePresence>
+        {open && isMobile() && (
+          <motion.div
+            key="backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setOpen(false)}
+            className="fixed inset-0 z-20 bg-black/60 backdrop-blur-sm lg:hidden"
+          />
+        )}
+      </AnimatePresence>
 
-      {/* LOGO */}
-      <Link to="/" className="px-6 py-5 text-xl text-primary font-bold">
-        HabitMind
-      </Link>
+      {/* Sidebar panel */}
+      <AnimatePresence>
+        {open && (
+          <motion.aside
+            key="sidebar"
+            initial={{ x: -272, opacity: 0.4 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: -272, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 280, damping: 28 }}
+            className="fixed left-0 top-0 z-30 w-64 h-screen bg-zinc-900 flex flex-col border-r border-zinc-800 shadow-2xl shadow-black/50"
+          >
+            {/* Logo row */}
+            <div className="flex items-center justify-between px-5 h-[60px] border-b border-zinc-800 shrink-0">
+              <Link to="/" className="text-lg font-semibold tracking-tight text-primary">
+                HabitMind
+              </Link>
+              <motion.button
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.92 }}
+                onClick={() => setOpen(false)}
+                className="p-1.5 rounded-lg text-zinc-500 hover:text-white hover:bg-zinc-800 transition-colors cursor-pointer"
+                aria-label="Close sidebar"
+              >
+                <LuPanelLeftClose size={18} />
+              </motion.button>
+            </div>
 
-      {/* MENU */}
-      <div className="flex flex-col gap-2 p-6">
+            {/* Main nav */}
+            <nav className="flex flex-col gap-0.5 px-3 pt-5 flex-1">
+              <p className="text-[12px] uppercase tracking-widest text-zinc-600 font-semibold px-3 mb-2">
+                Menu
+              </p>
+              {navItems.map(({ to, end, icon, label }, i) => (
+                <motion.div
+                  key={to}
+                  initial={{ opacity: 0, x: -12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.07, type: "spring", stiffness: 300, damping: 28 }}
+                >
+                  <NavLink
+                    to={to}
+                    end={end}
+                    className={navStyle}
+                    onClick={() => isMobile() && setOpen(false)}
+                  >
+                    <span className="shrink-0">{icon}</span>
+                    {label}
+                  </NavLink>
+                </motion.div>
+              ))}
+            </nav>
 
-        {/* Dashboard */}
-        <NavLink to="/dashboard" end className={navStyle}>
-          <LayoutDashboard size={18} />
-          Dashboard
-        </NavLink>
-
-        {/* Track Habits */}
-        <NavLink to="/dashboard/habits" className={navStyle}>
-          <CheckSquare size={18} />
-          Track Habits
-        </NavLink>
-
-        {/* Write Journals */}
-        <NavLink to="/dashboard/journals" className={navStyle}>
-          <NotebookPen size={18} />
-          Write Journals
-        </NavLink>
-
-        {/* Your Journals */}
-        <NavLink to="/dashboard/your-journals" className={navStyle}>
-          <BookOpen size={18} />
-          Your Journals
-        </NavLink>
-
-        <NavLink to="/dashboard/emotional-dashboard" className={navStyle}>
-          <BarChart2 size={18} />
-          Mood Insights
-        </NavLink>
-
-      </div>
-
-      {/* BOTTOM SECTION */}
-      <div className="mt-auto px-6 py-3 flex flex-col gap-2 border-t border-zinc-800">
-
-        <button className="flex items-center gap-3 p-2 rounded hover:bg-zinc-800 text-zinc-300 transition">
-          <Settings size={18} />
-          Settings
-        </button>
-
-        <button className="flex items-center gap-3 p-2 rounded hover:bg-zinc-800 text-zinc-300 transition">
-          <User size={18} />
-          Profile
-        </button>
-
-      </div>
-
-    </div>
+            {/* Bottom account section */}
+            <div className="px-3 pb-4 pt-3 border-t border-zinc-800">
+              <p className="text-[12px] uppercase tracking-widest text-zinc-600 font-semibold px-3 mb-2">
+                Account
+              </p>
+              <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-zinc-800 text-zinc-400 hover:text-zinc-200 transition-colors text-sm font-medium cursor-pointer">
+                <Settings size={18} className="shrink-0" />
+                Settings
+              </button>
+              <NavLink
+                to="/dashboard/profile"
+                className={navStyle}
+                onClick={() => isMobile() && setOpen(false)}
+              >
+                <User size={18} className="shrink-0" />
+                Profile
+              </NavLink>
+            </div>
+          </motion.aside>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
