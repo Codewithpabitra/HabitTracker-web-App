@@ -123,7 +123,7 @@ const About = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-8 md:gap-10 mt-5 sm:mt-6">
             {works.map((item, index) => (
-              <WorkCard key={index} title={item.title} icon={item.icon} desc={item.desc} />
+              <WorkCard key={index} index={index} title={item.title} icon={item.icon} desc={item.desc} />
             ))}
           </div>
         </div>

@@ -6,6 +6,7 @@ import authRoutes from "./routes/auth.routes.js"
 import habitRoutes from "./routes/habit.routes.js"
 import journalRoutes from "./routes/journal.routes.js"
 import agentRoutes from "./routes/agent.routes.js";
+import settingsRoutes from "./routes/settings.routes.js";
 
 
 import errorHandler from "./middlewares/error.middleware.js"
@@ -28,6 +29,7 @@ app.use("/api/auth", authRoutes)
 app.use("/api/habits", habitRoutes)
 app.use("/api/journal", journalRoutes)
 app.use("/api/agents", agentRoutes);
+app.use("/api/settings", settingsRoutes);
 
 
 // Global error handler

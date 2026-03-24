@@ -36,6 +36,18 @@ const userSchema = new mongoose.Schema(
     lastLogin: {
       type: Date,
     },
+    settings: {
+  weekStartDay: {
+    type: String,
+    enum: ["monday", "sunday"],
+    default: "monday",
+  },
+  coachTone: {
+    type: String,
+    enum: ["motivational", "neutral", "ruthless"],
+    default: "motivational",
+  },
+},
   },
   {
     timestamps: true,

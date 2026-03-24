@@ -264,7 +264,7 @@ export default function Login() {
     <>
       <AuthLayout
         title="Welcome Back"
-        subtitle="Sign in to track your habits with HabitMind now."
+        subtitle="Sign in to track your habits now."
       >
         <form onSubmit={handleSubmit} className="space-y-6">
           {error && (

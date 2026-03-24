@@ -13,6 +13,7 @@ import Journals from "./Pages/Journals";
 import YourJournals from "./Pages/YourJournals";
 import EmotionalDashboard from "./Pages/EmotionalDashboard";
 import Profile from "./Pages/Profile";
+import Settings from "./Pages/Settings";
 
 const App = () => {
   return (
@@ -38,6 +39,7 @@ const App = () => {
           <Route path="your-journals" element={<YourJournals />} />
           <Route path="emotional-dashboard" element={<EmotionalDashboard />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
     </div>

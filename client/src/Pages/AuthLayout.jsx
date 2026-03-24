@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { Compass } from 'lucide-react';
+import Logo from "../assets/Logo.png"
 
 
 
@@ -23,9 +24,9 @@ export default function AuthLayout({ children, title, subtitle }) {
           <motion.div 
             initial={{ scale: 0.8 }}
             animate={{ scale: 1 }}
-            className="inline-flex items-center justify-center w-12 h-12 bg-linear-to-br from-green-500 to-blue-600 rounded-2xl mb-6 shadow-xl shadow-indigo-500/20"
+            className="inline-flex items-center justify-center w-12 h-12  mb-3"
           >
-            <Compass  className="text-white w-6 h-6" />
+            <img className="w-10 h-10" src={Logo}/>
           </motion.div>
           <h1 className="text-2xl text-white font-bold tracking-tight mb-2 font-serif italic">{title}</h1>
           <p className="text-white/50 font-light text-sm ">{subtitle}</p>

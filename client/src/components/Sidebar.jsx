@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { LuPanelLeftClose } from "react-icons/lu";
 import { motion, AnimatePresence } from "motion/react";
+import Logo from "../assets/Logo.png"
 
 export default function Sidebar({ open, setOpen }) {
   const isMobile = () => window.innerWidth < 1024;
@@ -22,11 +23,16 @@ export default function Sidebar({ open, setOpen }) {
      }`;
 
   const navItems = [
-    { to: "/dashboard", end: true, icon: <LayoutDashboard size={18} />, label: "Dashboard" },
-    { to: "/dashboard/habits",              icon: <CheckSquare size={18} />,  label: "Track Habits"   },
-    { to: "/dashboard/journals",            icon: <NotebookPen size={18} />,  label: "Write Journals" },
-    { to: "/dashboard/your-journals",       icon: <BookOpen size={18} />,     label: "Your Journals"  },
-    { to: "/dashboard/emotional-dashboard", icon: <BarChart2 size={18} />,    label: "Mood Insights"  },
+    { to: "/dashboard",                     end: true, icon: <LayoutDashboard size={18} />, label: "Dashboard"      },
+    { to: "/dashboard/habits",                         icon: <CheckSquare size={18} />,     label: "Track Habits"   },
+    { to: "/dashboard/journals",                       icon: <NotebookPen size={18} />,     label: "Write Journals" },
+    { to: "/dashboard/your-journals",                  icon: <BookOpen size={18} />,        label: "Your Journals"  },
+    { to: "/dashboard/emotional-dashboard",            icon: <BarChart2 size={18} />,       label: "Mood Insights"  },
+  ];
+
+  const accountItems = [
+    { to: "/dashboard/settings", icon: <Settings size={18} />, label: "Settings" },
+    { to: "/dashboard/profile",  icon: <User size={18} />,     label: "Profile"  },
   ];
 
   return (
@@ -59,7 +65,8 @@ export default function Sidebar({ open, setOpen }) {
           >
             {/* Logo row */}
             <div className="flex items-center justify-between px-5 h-[60px] border-b border-zinc-800 shrink-0">
-              <Link to="/" className="text-lg font-semibold tracking-tight text-primary">
+              <Link to="/" className="text-xl font-semibold tracking-tight text-white flex justify-center items-center gap-1">
+                <img className="w-10 h-10" src={Logo}/>
                 HabitMind
               </Link>
               <motion.button
@@ -103,18 +110,23 @@ export default function Sidebar({ open, setOpen }) {
               <p className="text-[12px] uppercase tracking-widest text-zinc-600 font-semibold px-3 mb-2">
                 Account
               </p>
-              <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-zinc-800 text-zinc-400 hover:text-zinc-200 transition-colors text-sm font-medium cursor-pointer">
-                <Settings size={18} className="shrink-0" />
-                Settings
-              </button>
-              <NavLink
-                to="/dashboard/profile"
-                className={navStyle}
-                onClick={() => isMobile() && setOpen(false)}
-              >
-                <User size={18} className="shrink-0" />
-                Profile
-              </NavLink>
+              {accountItems.map(({ to, icon, label }, i) => (
+                <motion.div
+                  key={to}
+                  initial={{ opacity: 0, x: -12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.07, type: "spring", stiffness: 300, damping: 28 }}
+                >
+                  <NavLink
+                    to={to}
+                    className={navStyle}
+                    onClick={() => isMobile() && setOpen(false)}
+                  >
+                    <span className="shrink-0">{icon}</span>
+                    {label}
+                  </NavLink>
+                </motion.div>
+              ))}
             </div>
           </motion.aside>
         )}

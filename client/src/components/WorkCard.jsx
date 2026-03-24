@@ -1,7 +1,7 @@
 import React from 'react'
 import {motion} from "motion/react"
 
-const WorkCard = ({key, title, desc , icon}) => {
+const WorkCard = ({index, title, desc , icon}) => {
   return (
     <motion.div 
     initial={{
@@ -14,7 +14,7 @@ const WorkCard = ({key, title, desc , icon}) => {
     }}
     viewport={{once : true, amount : 0.5}}
     transition={{
-      delay : key * 1.2,
+      delay : index * 1.2,
       duration : 0.6
     }}
     className='flex flex-col gap-2 w-80 h-40 p-5 relative overflow-hidden'>

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X } from "lucide-react";
+import Logo from "../assets/Logo.png"
 
 const navLinks = [
   { label: "Features",     href: "features"     },
@@ -33,7 +34,8 @@ const Navbar = () => {
       <div className="max-w-6xl mx-auto flex items-center justify-between">
 
         {/* Logo */}
-        <div className="text-xl font-black tracking-tight text-primary">
+        <div className="text-xl font-semibold tracking-tight text-white flex justify-center items-center gap-1">
+          <img className="w-10 h-10" src={Logo}/>
           HabitMind
         </div>
 

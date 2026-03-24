@@ -1,7 +1,7 @@
 import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import generateToken from "../utils/generateToken.js";
-// import { sendWelcomeEmail } from "../services/email.service.js";
+import { sendWelcomeEmail } from "../services/email.service.js";
 import { registerSchema, loginSchema } from "../validators/auth.validator.js";
 
 
@@ -20,16 +20,12 @@ export const register = async (req, res, next) => {
       });
     }
 
-    // already hashed the password before saving
+    const user = await User.create({ name, email, password });
 
-    const user = await User.create({
-      name,
-      email,
-      password
+    // Non-blocking — email failure must never crash registration
+    sendWelcomeEmail(email, name).catch((err) => {
+      console.warn("Welcome email failed (non-critical):", err.message);
     });
-
-    // Send Welcome email
-    // await sendWelcomeEmail(email, name);
 
     const token = generateToken(user._id);
 
@@ -37,15 +33,14 @@ export const register = async (req, res, next) => {
       success: true,
       message: "User registered successfully",
       data: {
-        name : user.name,
-        email : user.email,
-        token
+        name:  user.name,
+        email: user.email,
+        token,
       }
     });
 
   } catch (error) {
     console.error("Error in register user", error);
-    // ZOD ERROR
     if (error.name === "ZodError") {
       return res.status(400).json({
         success: false,
@@ -55,7 +50,6 @@ export const register = async (req, res, next) => {
         }))
       });
     }
-
     next(error);
   }
 };
