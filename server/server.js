@@ -6,9 +6,9 @@ import connectDB from "./src/config/db.js";
 import serverless from "serverless-http";
 
 // Safe DB connection — never crashes the serverless function
-// connectDB().catch((err) => {
-//   console.error("MongoDB connection failed:", err.message);
-// });
+connectDB().catch((err) => {
+  console.error("MongoDB connection failed:", err.message);
+});
 
 // Only start the HTTP server in local development.
 // On Vercel (serverless), the handler export is used instead.
