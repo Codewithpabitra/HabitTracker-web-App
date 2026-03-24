@@ -1,13 +1,17 @@
-import dotenv from "dotenv"
+import dotenv from "dotenv";
 dotenv.config();
 
-import app from "./src/app.js"
-import connectDB from "./src/config/db.js"
+import app from "./src/app.js";
+import connectDB from "./src/config/db.js";
 import serverless from "serverless-http";
 
+// Safe DB connection — never crashes the serverless function
+connectDB().catch((err) => {
+  console.error("MongoDB connection failed:", err.message);
+});
 
-connectDB();
-
+// Only start the HTTP server in local development.
+// On Vercel (serverless), the handler export is used instead.
 if (process.env.NODE_ENV !== "production") {
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => {
@@ -16,5 +20,4 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 const handler = serverless(app);
-
 export default handler;
