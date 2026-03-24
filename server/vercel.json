@@ -1,21 +1,20 @@
-{
-  "version": 2,
-  "builds": [
-    {
-      "src": "server.js",  // Point to your server.js entry point
-      "use": "@vercel/node",  // Use Vercel's Node.js runtime for serverless deployment
-      "config": {
-        "includeFiles": [
-          "server/src/**",  // Include all your backend source files (app.js, routes, etc.)
-          "server/package.json"  // Include your package.json for dependencies
-        ]
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",  // API routes should go to your server
-      "dest": "server.js"
-    }
-  ]
+  {
+    "version": 2,
+    "builds": [
+        {
+            "src": "server.js",
+            "use": "@vercel/node",
+            "config": {
+                "includeFiles": [
+                    "dist/**"
+                ]
+            }
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "server.js"
+        }
+    ]
 }
