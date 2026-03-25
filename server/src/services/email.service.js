@@ -4,11 +4,14 @@ dotenv.config();
 
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.EMAIL,
     pass: process.env.EMAIL_PASS,
   },
+  connectionTimeout: 10000, // try to connect to gmail server till 10s
 });
 
 export const sendWelcomeEmail = async (email, name) => {
