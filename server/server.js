@@ -12,7 +12,7 @@ connectDB().catch((err) => {
 
 // Only start the HTTP server in local development.
 // On Vercel (serverless), the handler export is used instead.
-if (process.env.VERCEL !== "1") {
+if (process.env.NODE_ENV !== "production") {
   const PORT = process.env.PORT || 5000;
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
