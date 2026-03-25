@@ -10,6 +10,7 @@ connectDB().catch((err) => {
   console.error("MongoDB connection failed:", err.message);
 });
 
+console.log("NODE_ENV:", process.env.NODE_ENV);
 // Only start the HTTP server in local development.
 // On Vercel (serverless), the handler export is used instead.
 if (process.env.NODE_ENV !== "production") {
