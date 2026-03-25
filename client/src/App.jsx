@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Layout from "./components/layout";
+import Layout from "./components/Layout.jsx";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
