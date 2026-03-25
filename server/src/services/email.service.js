@@ -14,7 +14,8 @@ const transporter = nodemailer.createTransport({
 export const sendWelcomeEmail = async (email, name) => {
   const appUrl = process.env.CLIENT_URL || "http://localhost:5173";
 
-   await transporter.sendMail({
+   try {
+    await transporter.sendMail({
     from: `"HabitMind" <${process.env.EMAIL}>`,
     to: email,
     subject: "You're In! Start Building Better Habits Today🚀",
@@ -64,13 +65,19 @@ export const sendWelcomeEmail = async (email, name) => {
       </div>
     `,
   });
+
+  console.log("Welcome email sent successfully");
+   } catch (error) {
+    console.error("Email error ❌", error);
+   }
 };
 
 
 export const sendStreakMilestoneEmail = async (email, name, streak) => {
   const appUrl = process.env.CLIENT_URL || "http://localhost:5173";
 
- await transporter.sendMail({
+ try {
+  await transporter.sendMail({
     from: `"HabitMind" <${process.env.EMAIL}>`,
     to: email,
     subject: `🔥 Congrats ${name}! ${streak}-Day Streak Achieved!`,
@@ -122,4 +129,9 @@ export const sendStreakMilestoneEmail = async (email, name, streak) => {
       </div>
     `,
   });
+
+  console.log("Streak motivation email sent successfully");
+ } catch (error) {
+  console.error("Email error ❌", error);
+ }
 };

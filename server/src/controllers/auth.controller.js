@@ -23,9 +23,16 @@ export const register = async (req, res, next) => {
     const user = await User.create({ name, email, password });
 
     // Non-blocking — email failure must never crash registration
-    sendWelcomeEmail(email, name).catch((err) => {
-      console.warn("Welcome email failed (non-critical):", err.message);
-    });
+    // sendWelcomeEmail(email, name).catch((err) => {
+    //   console.warn("Welcome email failed (non-critical):", err.message);
+    // });
+
+    try {
+      sendWelcomeEmail(email, name);
+      console.log("Email sent successfully ✅");
+    } catch (error) {
+      console.error("Welcome Email error ", error);
+    }
 
     const token = generateToken(user._id);
 
